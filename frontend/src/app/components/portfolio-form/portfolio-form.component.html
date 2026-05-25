@@ -1,0 +1,97 @@
+<div class="card shadow-sm h-100">
+  <div class="card-header bg-primary text-white">
+    <h5 class="mb-0">➕ Adicionar Ação à Carteira</h5>
+  </div>
+  <div class="card-body">
+    <form (ngSubmit)="onSubmit()">
+      <div class="mb-3">
+        <label for="ticker" class="form-label fw-bold">Ticker *</label>
+        <input
+          type="text"
+          class="form-control"
+          id="ticker"
+          placeholder="ex: MSFT, TSLA"
+          [(ngModel)]="formData.ticker"
+          name="ticker"
+          (input)="formData.ticker = formData.ticker.toUpperCase()"
+          required
+        />
+      </div>
+
+      <div class="mb-3">
+        <label for="empresa" class="form-label fw-bold">Empresa *</label>
+        <input
+          type="text"
+          class="form-control"
+          id="empresa"
+          placeholder="ex: Microsoft"
+          [(ngModel)]="formData.empresa"
+          name="empresa"
+          required
+        />
+      </div>
+
+      <div class="mb-3">
+        <label for="data" class="form-label fw-bold">Data da Compra *</label>
+        <input
+          type="date"
+          class="form-control"
+          id="data"
+          [value]="formatDateInput()"
+          (change)="onDateChange($event)"
+          required
+        />
+      </div>
+
+      <div class="row">
+        <div class="col-md-6">
+          <div class="mb-3">
+            <label for="quantidade" class="form-label fw-bold">Quantidade *</label>
+            <input
+              type="number"
+              class="form-control"
+              id="quantidade"
+              placeholder="ex: 20"
+              [(ngModel)]="formData.quantidade"
+              name="quantidade"
+              min="1"
+              required
+            />
+          </div>
+        </div>
+        <div class="col-md-6">
+          <div class="mb-3">
+            <label for="preco" class="form-label fw-bold">Preço Compra (USD) *</label>
+            <input
+              type="number"
+              class="form-control"
+              id="preco"
+              placeholder="ex: 320.00"
+              [(ngModel)]="formData.precoDeCompra"
+              name="precoDeCompra"
+              step="0.01"
+              min="0.01"
+              required
+            />
+          </div>
+        </div>
+      </div>
+
+      <div *ngIf="successMessage" class="alert alert-success alert-dismissible fade show" role="alert">
+        ✅ {{ successMessage }}
+      </div>
+
+      <div *ngIf="errorMessage" class="alert alert-danger alert-dismissible fade show" role="alert">
+        ❌ {{ errorMessage }}
+      </div>
+
+      <button type="submit" class="btn btn-success w-100 fw-bold" [disabled]="submitting">
+        <span *ngIf="!submitting">✅ Adicionar Ação</span>
+        <span *ngIf="submitting">
+          <span class="spinner-border spinner-border-sm me-2"></span>
+          Adicionando...
+        </span>
+      </button>
+    </form>
+  </div>
+</div>

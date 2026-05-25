@@ -1,0 +1,74 @@
+<div class="container-fluid mt-5">
+  <div class="d-flex justify-content-between align-items-center mb-4">
+    <h2 class="mb-0">📊 Carteira de Ações</h2>
+    <button (click)="refresh()" class="btn btn-primary" [disabled]="loading">
+      <span *ngIf="!loading">🔄 Atualizar Cotações</span>
+      <span *ngIf="loading" class="spinner-border spinner-border-sm me-2"></span>
+      <span *ngIf="loading">Atualizando...</span>
+    </button>
+  </div>
+
+  <div *ngIf="loading && portfolioItems.length === 0" class="alert alert-info">
+    <span class="spinner-border spinner-border-sm me-2"></span>
+    Carregando dados...
+  </div>
+
+  <div *ngIf="portfolioItems.length === 0 && !loading" class="alert alert-warning">
+    Nenhuma ação na carteira. Adicione uma ação usando o formulário.
+  </div>
+
+  <div *ngIf="portfolioItems.length > 0" class="table-responsive">
+    <table class="table table-hover table-striped">
+      <thead class="table-dark">
+        <tr>
+          <th>Ticker</th>
+          <th>Empresa</th>
+          <th>Data da Compra</th>
+          <th class="text-center">QT</th>
+          <th class="text-end">PU</th>
+          <th class="text-end bg-info bg-opacity-10">Total</th>
+          <th class="text-end bg-info bg-opacity-10">Cotação do dia</th>
+          <th class="text-end bg-info bg-opacity-10">Valor</th>
+          <th class="text-end bg-info bg-opacity-10">Variação (%)</th>
+          <th class="text-center">Ações</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let item of portfolioItems" class="align-middle">
+          <td>
+            <span class="badge bg-primary">{{ item.ticker }}</span>
+          </td>
+          <td>{{ item.empresa }}</td>
+          <td>{{ formatDate(item.dataDaCompra) }}</td>
+          <td class="text-center">{{ item.quantidade }}</td>
+          <td class="text-end">{{ item.precoDeCompra | currency:'USD':'symbol':'1.2-2' }}</td>
+          <td class="text-end fw-bold">{{ (item.quantidade * item.precoDeCompra) | currency:'USD':'symbol':'1.2-2' }}</td>
+          <td class="text-end fw-bold text-primary">{{ item.cotacaoDoDia | currency:'USD':'symbol':'1.2-2' }}</td>
+          <td class="text-end fw-bold">{{ item.valor | currency:'USD':'symbol':'1.2-2' }}</td>
+          <td [ngClass]="'text-end fw-bold ' + getVariacaoColor(item.variacao)">
+            {{ item.variacao | currency:'USD':'symbol':'1.2-2' }}
+            <small class="ms-2" [ngClass]="getVariacaoColor(item.variacaoPercent)">
+              ({{ item.variacaoPercent | number:'1.2-2' }}%)
+            </small>
+          </td>
+          <td class="text-center">
+            <button (click)="deleteItem(item._id)" class="btn btn-sm btn-danger">🗑️</button>
+          </td>
+        </tr>
+      </tbody>
+      <tfoot class="table-success">
+        <tr class="fw-bold">
+          <td colspan="5" class="text-end">TOTAL:</td>
+          <td class="text-end">{{ totalAquisicao | currency:'USD':'symbol':'1.2-2' }}</td>
+          <td colspan="1"></td>
+          <td class="text-end">{{ totalAtual | currency:'USD':'symbol':'1.2-2' }}</td>
+          <td [ngClass]="'text-end ' + getTotalVariacaoColor()">
+            {{ totalVariacao | currency:'USD':'symbol':'1.2-2' }}
+            <small class="ms-2">({{ totalVariacaoPercent | number:'1.2-2' }}%)</small>
+          </td>
+          <td></td>
+        </tr>
+      </tfoot>
+    </table>
+  </div>
+</div>

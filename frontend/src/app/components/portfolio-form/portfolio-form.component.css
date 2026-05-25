@@ -1,0 +1,55 @@
+::ng-deep .card {
+  border: none;
+  border-top: 4px solid #0d6efd;
+  transition: all 0.3s ease;
+}
+
+::ng-deep .card:hover {
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15) !important;
+}
+
+::ng-deep .form-label {
+  color: #2c3e50;
+  font-size: 0.95rem;
+}
+
+::ng-deep .form-control {
+  border: 1px solid #ddd;
+  border-radius: 5px;
+  padding: 0.75rem;
+  transition: all 0.3s ease;
+}
+
+::ng-deep .form-control:focus {
+  border-color: #0d6efd;
+  box-shadow: 0 0 0 0.2rem rgba(13, 110, 253, 0.25);
+}
+
+::ng-deep .btn-success {
+  background-color: #198754;
+  border-color: #198754;
+  padding: 0.75rem;
+  font-size: 1rem;
+  transition: all 0.3s ease;
+}
+
+::ng-deep .btn-success:hover:not(:disabled) {
+  background-color: #157347;
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(25, 135, 84, 0.3);
+}
+
+::ng-deep .alert {
+  animation: slideIn 0.3s ease;
+}
+
+@keyframes slideIn {
+  from {
+    opacity: 0;
+    transform: translateY(-10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}

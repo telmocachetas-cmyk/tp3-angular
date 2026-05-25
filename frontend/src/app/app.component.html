@@ -1,0 +1,28 @@
+<div class="container mt-5">
+  <div class="header mb-5">
+    <h1 class="display-4 fw-bold text-center mb-2">📈 Portfolio Tracker</h1>
+    <p class="text-center text-muted">Monitor sua carteira de ações em tempo real</p>
+    <hr class="my-4">
+  </div>
+
+  <div class="row mb-4">
+    <div class="col-md-6">
+      <app-portfolio-form></app-portfolio-form>
+    </div>
+    <div class="col-md-6">
+      <div class="card bg-light h-100">
+        <div class="card-body">
+          <h5 class="card-title">ℹ️ Como Usar</h5>
+          <ul class="list-unstyled">
+            <li><strong>1.</strong> Adicione ações na carteira usando o formulário</li>
+            <li><strong>2.</strong> O sistema busca cotações em tempo real</li>
+            <li><strong>3.</strong> Veja ganhos/perdas de forma visual</li>
+            <li><strong>4.</strong> Cor verde = positiva | Cor vermelha = negativa</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <app-portfolio-table></app-portfolio-table>
+</div>
