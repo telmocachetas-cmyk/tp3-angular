@@ -170,4 +170,4 @@ Projeto desenvolvido para fins académicos - TP3 Programação Web II
 
 ## 👨‍💻 Autor
 
-Desenvolvido como trabalho prático de Web Programming II
+Desenvolvido como trabalho prático de Programação Web II
